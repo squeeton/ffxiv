@@ -261,4 +261,14 @@ img {
   .courses h2 {
     float: left;
   }
+
+
+  .loading-div{
+    width:100%;
+    align-content: center;
+  }
+
+  .center{
+    text-align: center;
+  }
 }

@@ -5,10 +5,7 @@ import NoItems from './NoItems';
 const ItemList = props => {
 
     const results = props.data;
-    console.log('props: ', props);
     let items;
-    // console.log('props: ', props);
-    console.log('props length: ', props.data.length);
     if (results.length > 0) {
         items = results.map((item, index) =>
             <Item i = {item}
