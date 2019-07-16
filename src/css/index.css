@@ -81,7 +81,8 @@ button {
 header {
   background: #000000;
   margin-bottom: 2em;
-  height:56px;
+  height:60.8px;
+  width: 100%;
 }
 
 .main-content {
