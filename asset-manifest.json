@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/github.io/ffxiv/static/css/main.f75f27e5.chunk.css",
-    "main.js": "/github.io/ffxiv/static/js/main.ae44e18c.chunk.js",
-    "main.js.map": "/github.io/ffxiv/static/js/main.ae44e18c.chunk.js.map",
-    "runtime~main.js": "/github.io/ffxiv/static/js/runtime~main.16d49a8f.js",
-    "runtime~main.js.map": "/github.io/ffxiv/static/js/runtime~main.16d49a8f.js.map",
-    "static/css/2.22a7d4ef.chunk.css": "/github.io/ffxiv/static/css/2.22a7d4ef.chunk.css",
-    "static/js/2.3774e174.chunk.js": "/github.io/ffxiv/static/js/2.3774e174.chunk.js",
-    "static/js/2.3774e174.chunk.js.map": "/github.io/ffxiv/static/js/2.3774e174.chunk.js.map",
-    "index.html": "/github.io/ffxiv/index.html",
-    "precache-manifest.7689536f735b1d9f25993b8cac14ec0a.js": "/github.io/ffxiv/precache-manifest.7689536f735b1d9f25993b8cac14ec0a.js",
-    "service-worker.js": "/github.io/ffxiv/service-worker.js",
-    "static/css/2.22a7d4ef.chunk.css.map": "/github.io/ffxiv/static/css/2.22a7d4ef.chunk.css.map",
-    "static/css/main.f75f27e5.chunk.css.map": "/github.io/ffxiv/static/css/main.f75f27e5.chunk.css.map",
-    "static/media/logo.png": "/github.io/ffxiv/static/media/logo.1d985892.png"
+    "main.css": "/ffxiv/static/css/main.f75f27e5.chunk.css",
+    "main.js": "/ffxiv/static/js/main.ae44e18c.chunk.js",
+    "main.js.map": "/ffxiv/static/js/main.ae44e18c.chunk.js.map",
+    "runtime~main.js": "/ffxiv/static/js/runtime~main.1daca9b6.js",
+    "runtime~main.js.map": "/ffxiv/static/js/runtime~main.1daca9b6.js.map",
+    "static/css/2.22a7d4ef.chunk.css": "/ffxiv/static/css/2.22a7d4ef.chunk.css",
+    "static/js/2.3774e174.chunk.js": "/ffxiv/static/js/2.3774e174.chunk.js",
+    "static/js/2.3774e174.chunk.js.map": "/ffxiv/static/js/2.3774e174.chunk.js.map",
+    "index.html": "/ffxiv/index.html",
+    "precache-manifest.ce2c15f48e478b6d771bbcc7d4a6909d.js": "/ffxiv/precache-manifest.ce2c15f48e478b6d771bbcc7d4a6909d.js",
+    "service-worker.js": "/ffxiv/service-worker.js",
+    "static/css/2.22a7d4ef.chunk.css.map": "/ffxiv/static/css/2.22a7d4ef.chunk.css.map",
+    "static/css/main.f75f27e5.chunk.css.map": "/ffxiv/static/css/main.f75f27e5.chunk.css.map",
+    "static/media/logo.png": "/ffxiv/static/media/logo.1d985892.png"
   }
 }
