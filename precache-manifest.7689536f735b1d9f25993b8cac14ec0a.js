@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "db097c3c9b24b72cc79f31710a2f8b63",
+    "revision": "af96828608af473b7af48565562992d6",
     "url": "/github.io/ffxiv/index.html"
   },
   {
