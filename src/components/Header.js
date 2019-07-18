@@ -7,9 +7,9 @@ const Header = () => (
     <img src={logo} alt="FFXIV Fan Page"></img>
     <ul className="main-nav">
       <li><NavLink exact to="/">Marketboard</NavLink></li>
-      <li><NavLink to="/about">Gathering</NavLink></li>
-      <li><NavLink to="/teachers">Crafting</NavLink></li>
-      <li><NavLink to="/courses">About</NavLink></li>
+      <li><NavLink to="/gathering">Gathering</NavLink></li>
+      <li><NavLink to="/crafting">Crafting</NavLink></li>
+      <li><NavLink to="/about">About</NavLink></li>
     </ul>    
   </header>
 );

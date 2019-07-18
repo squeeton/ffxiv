@@ -6,10 +6,10 @@ import {
 } from 'react-router-dom';
 //App componentes
 import Header from './Header';
+import Gathering from './Gathering';
+import Crafting from './Crafting';
 import About from './About';
-import Teachers from './Teachers';
 import NotFound from './NotFound';
-import Featured from './Featured';
 import Marketboard from './Marketboard';
 import { Consumer } from './Context';
 
@@ -28,9 +28,9 @@ class App extends Component {
                 <Header />
                 <Switch>
                   <Route exact path="/" render={() => <Marketboard loadPercent={context.loadPercent}/>} />
-                  <Route path="/about" render={() => <About title='About' />} />
-                  <Route exact path="/teachers" component={Teachers} />
-                  <Route path="/teachers/:topic/:name" component={Featured} />
+                  <Route path="/gathering" render={() => <Gathering title='Gathering' />} />
+                  <Route exact path="/crafting" component={Crafting} />
+                  <Route exact path="/about" component={About} />
                   <Route component={NotFound} />
                 </Switch>
               </div>
