@@ -3,7 +3,7 @@ import Item from './Item';
 import NoItems from './NoItems';
 import { Consumer } from './Context';
 
-const ItemList = props => {
+const ItemList = () => {
 
 
     return (
@@ -11,11 +11,12 @@ const ItemList = props => {
             {context => {
 
                 const results = context.items;
+                console.log('results:',results);
                 let items;
                 if (results.length > 0) {
                     items = results.map((item, index) =>
-                        <Item i={item}
-                            key={item.ID.toString()}
+                        <Item i={item.Goblin}
+                            key={item.Goblin.ID.toString()}
                             index={index}
                         />
                     )

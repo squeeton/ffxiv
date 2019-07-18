@@ -1,18 +1,15 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 class Item extends PureComponent {
-    static propTypes={
-    }
+    
     render() {
 
-        console.log(this.props.i);
 
         const oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
         const minPriceItem = this.props.i.Prices.reduce((prev, current) =>
-            (prev.PricePerUnit > current.PricePerUnit) ? prev : current)
+            (prev.PricePerUnit > current.PricePerUnit) ? prev : current, 0)
 
         const lastWeekSales = this.props.i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo)
 
@@ -30,8 +27,6 @@ class Item extends PureComponent {
             }
         }
 
-        console.log('lastweekSales:', lastWeekSales);
-        console.log('gilLastWeek:', gilLastWeek);
 
         return (
             <tr>

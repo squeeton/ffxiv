@@ -22,10 +22,10 @@ class Marketboard extends Component {
     let page;
 
     if (this.props.loadPercent < 100) {
-      page = <Loading/>
+      page = <Loading />
     }
     else {
-      page = <ItemList data={this.props.items}/>
+      page = <ItemList/>
     }
 
     return (

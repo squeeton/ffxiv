@@ -27,7 +27,7 @@ class App extends Component {
               <div className="container">
                 <Header />
                 <Switch>
-                  <Route exact path="/" render={() => <Marketboard />} />
+                  <Route exact path="/" render={() => <Marketboard loadPercent={context.loadPercent}/>} />
                   <Route path="/about" render={() => <About title='About' />} />
                   <Route exact path="/teachers" component={Teachers} />
                   <Route path="/teachers/:topic/:name" component={Featured} />
