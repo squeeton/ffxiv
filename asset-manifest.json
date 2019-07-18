@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/github.io/ffxiv/static/css/main.f75f27e5.chunk.css",
+    "main.js": "/github.io/ffxiv/static/js/main.ae44e18c.chunk.js",
+    "main.js.map": "/github.io/ffxiv/static/js/main.ae44e18c.chunk.js.map",
+    "runtime~main.js": "/github.io/ffxiv/static/js/runtime~main.16d49a8f.js",
+    "runtime~main.js.map": "/github.io/ffxiv/static/js/runtime~main.16d49a8f.js.map",
+    "static/css/2.22a7d4ef.chunk.css": "/github.io/ffxiv/static/css/2.22a7d4ef.chunk.css",
+    "static/js/2.3774e174.chunk.js": "/github.io/ffxiv/static/js/2.3774e174.chunk.js",
+    "static/js/2.3774e174.chunk.js.map": "/github.io/ffxiv/static/js/2.3774e174.chunk.js.map",
+    "index.html": "/github.io/ffxiv/index.html",
+    "precache-manifest.3717ce53714c022f866c57a8810cfd3e.js": "/github.io/ffxiv/precache-manifest.3717ce53714c022f866c57a8810cfd3e.js",
+    "service-worker.js": "/github.io/ffxiv/service-worker.js",
+    "static/css/2.22a7d4ef.chunk.css.map": "/github.io/ffxiv/static/css/2.22a7d4ef.chunk.css.map",
+    "static/css/main.f75f27e5.chunk.css.map": "/github.io/ffxiv/static/css/main.f75f27e5.chunk.css.map",
+    "static/media/logo.png": "/github.io/ffxiv/static/media/logo.1d985892.png"
+  }
+}
