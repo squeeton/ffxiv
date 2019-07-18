@@ -36,7 +36,8 @@ const ItemList = () => {
                                 <th>Lowest Price</th>
                                 <th>Quantity</th>
                                 <th>Gil Made Last Week</th>
-                                <th>Sold Last Week</th>
+                                <th>Units Sold Last Week</th>
+                                <th>Transactions Last Week</th>
                             </tr>
                         </thead>
                         <tbody className="table table-dark table-striped">

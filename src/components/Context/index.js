@@ -6,7 +6,7 @@ export class Provider extends Component {
     state = {
         data: [],
         items: [],
-        marketMainTable:[],
+        marketMainTable: [],
         loadPercent: 0,
         pageNumber: 0,
         pageTotal: 0
@@ -15,11 +15,11 @@ export class Provider extends Component {
 
     componentDidMount() {
         console.log('Fetching Data');
-        
+
         this.FetchInitial();
     }
 
-    FetchInitial(){
+    FetchInitial() {
         let itemIDs;
         let getItemIdUrl = `https://xivapi.com/search?indexes=item&filters=ItemSearchCategory.ID>=9&page=${this.state.pageNumber}&columns=ID`;
         let url;
@@ -54,6 +54,7 @@ export class Provider extends Component {
                             MinPriceQuantity: i.Prices.reduce((prev, current) =>
                                 (prev.PricePerUnit < current.PricePerUnit) ? prev : current, 0).Quantity,
                             LastWeekGil: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).map(item => item.PriceTotal).reduce((prev, next) => prev + next, 0),
+                            LastWeekTransactions: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).length,
                             LastWeekQuantity: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).map(item => item.Quantity).reduce((prev, next) => prev + next, 0)
                         }))
 
@@ -61,18 +62,20 @@ export class Provider extends Component {
                         console.log('items:', items);
 
                         marketMainTable = items.map(item => ({
-                                ItemName: item.Item.Name,
-                                MinPrice: (item.MinPrice === undefined) ? ''
-                                    : item.MinPrice.toLocaleString(navigator.language),
-                                MinPriceQuantity: (item.MinPriceQuantity === undefined) ? ''
-                                    : item.MinPriceQuantity.toLocaleString(navigator.language),
-                                LastWeekGil: (item.LastWeekGil === undefined) ? ''
-                                    : item.LastWeekGil.toLocaleString(navigator.language),
-                                LastWeekQuantity: (item.LastWeekQuantity === undefined) ? ''
-                                    : item.LastWeekQuantity.toLocaleString(navigator.language)
-                            }))
+                            ItemName: item.Item.Name,
+                            MinPrice: (item.MinPrice === undefined) ? ''
+                                : item.MinPrice.toLocaleString(navigator.language),
+                            MinPriceQuantity: (item.MinPriceQuantity === undefined) ? ''
+                                : item.MinPriceQuantity.toLocaleString(navigator.language),
+                            LastWeekGil: (item.LastWeekGil === undefined) ? ''
+                                : item.LastWeekGil.toLocaleString(navigator.language),
+                            LastWeekQuantity: (item.LastWeekQuantity === undefined) ? ''
+                                : item.LastWeekQuantity.toLocaleString(navigator.language),
+                            LastWeekQuantity: (item.LastWeekQuantity === undefined) ? ''
+                                : item.LastWeekQuantity.toLocaleString(navigator.language)
+                        }))
 
-                            console.log('marketMainTable:', marketMainTable);
+                        console.log('marketMainTable:', marketMainTable);
 
                         this.setState({
                             items: items,
@@ -83,7 +86,7 @@ export class Provider extends Component {
             });
     }
 
-    FetchNextPage(){
+    FetchNextPage() {
 
     }
 

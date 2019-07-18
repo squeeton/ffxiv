@@ -280,7 +280,6 @@ header,
 
   .item-table{
     width: 100%;
-    border:red, solid,5px;
   }
 
 .table.table-dark{
@@ -300,7 +299,7 @@ header,
   }
   
    .table-dark .tr-hover:hover {
-    background-color: #1E90FF;
+    background-color: #054da0;
   }
   
   /* .table-hover .table-dark:hover > td,
