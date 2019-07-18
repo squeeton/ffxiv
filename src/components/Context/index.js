@@ -4,6 +4,7 @@ const AppContext = React.createContext();
 
 export class Provider extends Component {
     state = {
+        data: [],
         items: [],
         loadPercent: 0,
         pageNumber: 0,
@@ -31,19 +32,45 @@ export class Provider extends Component {
                 fetch(url, { mode: 'cors' })
                     .then(response => response.json())
                     .then(data => {
+
+                        const oneWeekAgo = new Date();
+                        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+                        let gilLastWeek;
+                        let quantityLastWeek;
+                        let items;
+                        items = data.map((i) => { return i.Goblin });
+                        
+                        items = items.map(i => ({
+                            ...i,
+                            MinPrice: i.Prices.reduce((prev, current) =>
+                                (prev.PricePerUnit < current.PricePerUnit) ? prev : current, 0).PricePerUnit,
+                                MinPriceQuantity: i.Prices.reduce((prev, current) =>
+                                    (prev.PricePerUnit < current.PricePerUnit) ? prev : current, 0).Quantity,
+                            // LastWeekSales: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo),
+                            LastWeekGil: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).map(item=>item.PriceTotal).reduce((prev, next)=>prev+next, 0),
+                            LastWeekQuantity: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).map(item=>item.Quantity).reduce((prev, next)=>prev+next, 0)
+                        }))
+
+                        console.log('data:', data);
+                        console.log('items:', items);
                         this.setState({
-                            items: data,
+                            items: items,
+                            data: data,
                             loadPercent: 100
                         })
                     })
             });
     }
 
+    sum(prev, next) {
+        return prev + next;
+    }
     render() {
         return (
             <AppContext.Provider value={{
-                items: this.state.items,
                 data: this.state.data,
+                items: this.state.items,
                 loadPercent: this.state.loadPercent,
                 actions: {}
             }}>

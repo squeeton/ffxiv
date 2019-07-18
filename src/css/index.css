@@ -6,9 +6,9 @@
 
 /* ================================= 
   ELEMENT STYLES
-==================================== */
+====================================  */
 
-* {
+{
   box-sizing: border-box;
 }
 body {
@@ -16,7 +16,7 @@ body {
   background: #303030;
   margin: 0;
   font-family: 'Roboto', sans-serif;
-}
+ }
 h1,
 h2,
 ul {
@@ -44,7 +44,7 @@ hr {
 
 /* FORM & BUTTON STYLES -------- */
 
-.home a,
+ .home a,
 input,
 button {
   padding: .5em;
@@ -62,21 +62,23 @@ button {
   padding-right: 1em;
   cursor: pointer;
   border-color: rgba(0,0,0, .1);
-}
+} 
 
 /* ================================= 
   LAYOUT & PAGE STYLES
 ==================================== */
 
 .container {
-  width: 95%;
+  background: #fff;
+  width: 100%;
   max-width: 1280px;
   padding-bottom: 2em;
+  padding-left:0;
+  padding-right:0;
   margin: 0 auto 2em;
-  background: #fff;
   border-radius: .5em;
   box-shadow: 0 3px rgba(0,0,0, .1);
-  overflow: hidden;
+  overflow: hidden; 
 }
 header {
   background: #000000;
@@ -95,7 +97,7 @@ header {
 }
 .course {
   margin-bottom: 1em;
-}
+} 
 
 /* IMAGES -------- */
 
@@ -114,7 +116,7 @@ img {
   max-width:100%;
   max-height: 100%;
   height:auto;
-}
+} 
 
 /* MAIN NAV -------- */
 
@@ -131,11 +133,28 @@ img {
 .main-nav .active {
   color: #fff;
   background: #3b80d1;
+} 
+.icn-logo {
+  margin-right: auto;
+  padding: 0 2em;
 }
+header,
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+}
+.main-nav a {
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  padding: 1.25em 1.5em;
+}
+.main-nav a:hover {
+  border-color: rgba(0,0,0, .1);
+} 
 
 /* COURSE NAV -------- */
 
-.course-nav li {
+/* .course-nav li {
   display: inline-block;
 }
 .course-nav li + li {
@@ -153,11 +172,11 @@ img {
 .course-nav a.active {
   color: #fff;
   background: #39add1;
-}
+} */
 
 /* ICONS -------- */
 
-.icn-logo {
+  /* .icn-logo {
   background: #54606b;
   color: #fff;
 }
@@ -169,13 +188,20 @@ img {
 .icn-error {
   font-size: 3.2em;
   margin-bottom: .25em;
-}
+}   */
+/* COURSE NAV -------- */
+  /* .course-nav {
+    float: right;
+  } 
+  .courses h2 {
+    float: left;
+  } */
 
 /* ================================= 
   MEDIA QUERIES
 ==================================== */
 
-@media (min-width: 0) and (max-width: 768px) { 
+/* @media (min-width: 0) and (max-width: 768px) { 
   body {
     padding-top: .8em;
   }
@@ -236,34 +262,13 @@ img {
   .teacher:nth-child(2n+3) {
     clear: left;
     margin-left: 0;
-  }
-  /* MAIN NAV -------- */
-  .icn-logo {
-    margin-right: auto;
-    padding: 0 2em;
-  }
-  header,
-  .main-nav {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .main-nav a {
-    border-left: 3px solid transparent;
-    border-right: 3px solid transparent;
-    padding: 1.25em 1.5em;
-  }
-  .main-nav a:hover {
-    border-color: rgba(0,0,0, .1);
-  }
-  /* COURSE NAV -------- */
-  .course-nav {
-    float: right;
-  } 
-  .courses h2 {
-    float: left;
-  }
+  } */
+  
+
+  
 
 
+  /* My own CSS */
   .loading-div{
     width:100%;
     align-content: center;
@@ -272,4 +277,53 @@ img {
   .center{
     text-align: center;
   }
+
+  .item-table{
+    width: 100%;
+    border:red, solid,5px;
+  }
+
+.table.table-dark{
+}
+
+  .table-dark,
+  .table-dark > th,
+  .table-dark > td {
+    background-color: #4188dc;
+  }
+  
+  .table-dark th,
+  .table-dark td,
+  .table-dark thead th,
+  .table-dark tbody + tbody {
+    border-color: #95999c;
+  }
+  
+   .table-dark .tr-hover:hover {
+    background-color: #1E90FF;
+  }
+  
+  /* .table-hover .table-dark:hover > td,
+  .table-hover .table-dark:hover > th {
+    background-color: #b9bbbe; 
+  }*/
+
+  .table .thead-dark th {
+    color: #fff;
+    background-color: #212121;
+    border-color: #454d55;
+  }
+  .table-dark {
+    color: #fff;
+    background-color: #212121;
+  }
+  
+  .table-dark th,
+  .table-dark td,
+  .table-dark thead th {
+    border-color: #454d55;
+  }
+  
+.table-dark.table-striped tbody tr:nth-of-type(odd) {
+  background-color:#343a40;
 }

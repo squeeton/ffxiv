@@ -10,14 +10,18 @@ const ItemList = () => {
         <Consumer>
             {context => {
 
+                const oneWeekAgo = new Date();
+                oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
                 const results = context.items;
-                console.log('results:',results);
+                console.log('context', context.items);
+
                 let items;
                 if (results.length > 0) {
-                    items = results.map((item, index) =>
-                        <Item i={item.Goblin}
-                            key={item.Goblin.ID.toString()}
-                            index={index}
+                    items = results.map((item) =>
+
+                        <Item item={item}
+                            key={item.ID.toString()}
                         />
                     )
                 }
@@ -25,8 +29,8 @@ const ItemList = () => {
                     items = <NoItems />
                 }
                 return (
-                    <table>
-                        <thead>
+                    <table className="table table-dark item-table">
+                        <thead className="thead-dark">
                             <tr>
                                 <th>Item</th>
                                 <th>Lowest Price</th>
@@ -35,7 +39,7 @@ const ItemList = () => {
                                 <th>Sold Last Week</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="table table-dark table-striped">
                             {items}
                         </tbody>
                     </table>
