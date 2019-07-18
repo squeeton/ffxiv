@@ -2,7 +2,7 @@
   "name": "ffxiv-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://squeeton/github.io/ffxiv",
+  "homepage": "https://squeeton.github.io/ffxiv/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "gh-pages": "^2.0.1",
