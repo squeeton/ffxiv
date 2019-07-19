@@ -1,5 +1,4 @@
 import React from 'react';
-import TeacherList from '../data/teachers';
 
   
 

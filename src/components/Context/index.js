@@ -6,16 +6,16 @@ export class Provider extends Component {
     state = {
         data: [],
         items: [],
-        marketMainTable: [],
         loadPercent: 0,
-        pageNumber: 0,
-        pageTotal: 0
+        loadIncrementAmount: 0,
+        pageNumber: 1,
+        pageTotal: 0,
+        loadedPages: [1]
     }
 
 
     componentDidMount() {
         console.log('Fetching Data');
-
         this.FetchInitial();
     }
 
@@ -29,13 +29,22 @@ export class Provider extends Component {
             .then(response => response.json()
             )
             .then(response => {
+                console.log('response', response);
+                console.log(response.Pagination.Page);
                 itemIDs = response.Results.map((i) => { return (i.ID); }).toString();
 
                 url = `https://xivapi.com/market/items?servers=Goblin&ids=${itemIDs}`
+
+                var loadIncrementAmount = ((1 / (response.Pagination.PageTotal * 2) * 100));
+
+                // var loadIncrementAmount = 25;
+
                 this.setState({
                     pageTotal: response.Pagination.PageTotal,
-                    loadPercent: 25
+                    loadIncrementAmount: loadIncrementAmount,
+                    loadPercent: loadIncrementAmount
                 });
+
                 fetch(url, { mode: 'cors' })
                     .then(response => response.json())
                     .then(data => {
@@ -44,7 +53,6 @@ export class Provider extends Component {
                         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
                         let items;
-                        let marketMainTable;
                         items = data.map((i) => { return i.Goblin });
 
                         items = items.map(i => ({
@@ -56,38 +64,92 @@ export class Provider extends Component {
                             LastWeekGil: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).map(item => item.PriceTotal).reduce((prev, next) => prev + next, 0),
                             LastWeekTransactions: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).length,
                             LastWeekQuantity: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).map(item => item.Quantity).reduce((prev, next) => prev + next, 0)
-                        }))
+                        }));
 
-                        console.log('data:', data);
-                        console.log('items:', items);
+                        // console.log('data:', data);
+                        // console.log('items:', items);
 
-                        marketMainTable = items.map(item => ({
-                            ItemName: item.Item.Name,
-                            MinPrice: (item.MinPrice === undefined) ? ''
-                                : item.MinPrice.toLocaleString(navigator.language),
-                            MinPriceQuantity: (item.MinPriceQuantity === undefined) ? ''
-                                : item.MinPriceQuantity.toLocaleString(navigator.language),
-                            LastWeekGil: (item.LastWeekGil === undefined) ? ''
-                                : item.LastWeekGil.toLocaleString(navigator.language),
-                            LastWeekQuantity: (item.LastWeekQuantity === undefined) ? ''
-                                : item.LastWeekQuantity.toLocaleString(navigator.language),
-                            LastWeekQuantity: (item.LastWeekQuantity === undefined) ? ''
-                                : item.LastWeekQuantity.toLocaleString(navigator.language)
-                        }))
 
-                        console.log('marketMainTable:', marketMainTable);
-
-                        this.setState({
+                        this.setState(prevState => ({
                             items: items,
                             data: data,
-                            loadPercent: 100
-                        })
+                            loadPercent: prevState.loadPercent + prevState.loadIncrementAmount
+                        }));
                     })
+                    .then(data => {
+                        this.intervalID = setInterval(() => this.tick(), 200);
+                        // this.setState({                            
+                        //     loadPercent:100
+                        // }
+                        // );
+                    }
+                    )
             });
     }
 
     FetchNextPage() {
 
+        let itemIDs;
+
+        if (this.state.pageNumber !== this.state.pageTotal) {
+            fetch(`https://xivapi.com/search?indexes=item&filters=ItemSearchCategory.ID>=9&page=${this.state.pageNumber + 1}&columns=ID`, { mode: 'cors' })
+                .then(response => response.json()
+                )
+                .then(response => {
+                    console.log('response page:', response.Pagination.Page);
+                    itemIDs = response.Results.map((i) => { return (i.ID); }).toString();
+
+                    this.setState(prevState => ({
+                        loadedPages: [...prevState.loadedPages,
+                        response.Pagination.Page
+                        ],
+                        pageNumber: response.Pagination.Page,
+                        loadPercent: prevState.loadPercent + prevState.loadIncrementAmount
+                    }));
+
+                    fetch(`https://xivapi.com/market/items?servers=Goblin&ids=${itemIDs}`, { mode: 'cors' })
+                        .then(response => response.json())
+                        .then(data => {
+
+                            const oneWeekAgo = new Date();
+                            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+                            let items;
+                            items = data.map((i) => { return i.Goblin });
+
+                            items = items.map(i => ({
+                                ...i,
+                                MinPrice: i.Prices.reduce((prev, current) =>
+                                    (prev.PricePerUnit < current.PricePerUnit) ? prev : current, 0).PricePerUnit,
+                                MinPriceQuantity: i.Prices.reduce((prev, current) =>
+                                    (prev.PricePerUnit < current.PricePerUnit) ? prev : current, 0).Quantity,
+                                LastWeekGil: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).map(item => item.PriceTotal).reduce((prev, next) => prev + next, 0),
+                                LastWeekTransactions: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).length,
+                                LastWeekQuantity: i.History.filter(d => d.PurchaseDateMS >= oneWeekAgo).map(item => item.Quantity).reduce((prev, next) => prev + next, 0)
+                            }));
+
+                            this.setState(prevState => ({
+                                items: [...prevState.items, ...items],
+                                data: [...prevState.data, ...data],
+                                loadPercent: prevState.loadPercent + prevState.loadIncrementAmount
+                            }));
+                        })
+                });
+        }
+
+    }
+
+    tick = () => {
+        if (this.state.pageNumber !== this.state.pageTotal) {
+            this.FetchNextPage(this.state.pageNumber);
+
+            this.setState(prevState => ({
+                pageNumber: prevState.pageNumber + 1
+            }));
+        }
+        else {
+            clearInterval(this.intervalID);
+        }
     }
 
     render() {

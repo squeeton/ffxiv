@@ -31,7 +31,7 @@ export default class Loading extends Component {
                             <div className="row">
                                 <div className="col"></div>
                                 <div className="col center">
-                                    <h2>{context.loadPercent}%</h2>
+                                    <h2>{(context.loadPercent).toFixed(1)}%</h2>
                                 </div>
                                 <div className="col"></div>
                             </div>
