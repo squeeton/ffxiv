@@ -43,7 +43,7 @@ const ItemList = () => {
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
                     Header: 'Lowest HQ',
-                    accessor: 'MinPrice',
+                    accessor: 'MinPriceHQ',
                     className: 'number-table',
                     sortable: true,
                     Cell: props => new Intl.NumberFormat().format(props.value)

@@ -177,25 +177,7 @@ export class Provider extends Component {
         });
 
         this.setState(prevState => ({
-            items: itemList.map(i => {
-                let crafter;
-                let rarity;
-                if (index[i.Item.ID]) {
-                    if (index[i.Item.ID].Recipes === null) {
-                        crafter = null;
-                    }
-                    else {
-                        crafter = this.GetClass(index[i.Item.ID].Recipes[0].ClassJobID);
-                    }
-                    rarity = this.GetRarity(index[i.Item.ID].Rarity);
-                }
-
-                return {
-                    ...i,
-                    Crafter: crafter,
-                    Rarity: rarity
-                }
-            })
+            items: itemList
         }));
     }
 
