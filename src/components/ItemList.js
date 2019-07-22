@@ -13,17 +13,6 @@ const ItemList = () => {
                 const oneWeekAgo = new Date();
                 oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-                // const customNameFilterMethod = ({ filter, row }) => {
-                //     console.log('filter:', filter);
-                //     console.log('row:', row[filter.id]);
-
-
-                //     if (filter.value === '') { return true }
-
-                    
-                //     else { return false }
-                // }
-
                 const columns = [{
                     Header: 'Item ID',
                     accessor: 'ItemID',
@@ -58,7 +47,7 @@ const ItemList = () => {
                     className: 'number-table',
                     sortable: true,
                     Cell: props => new Intl.NumberFormat().format(props.value)
-                },{
+                }, {
                     Header: 'Gil Made Last Week',
                     accessor: 'LastWeekGil',
                     className: 'number-table',
@@ -66,9 +55,9 @@ const ItemList = () => {
                     Cell: props => new Intl.NumberFormat().format(props.value),
                     filterable: true,
                     filterMethod: (filter, row) => {
-                        console.log(row[filter.id],'>=',parseInt(filter.value),'=', row[filter.id]>=parseInt(filter.value));
+                        console.log(row[filter.id], '>=', parseInt(filter.value), '=', row[filter.id] >= parseInt(filter.value));
                         if (filter.value === '') { return true }
-                        if (row[filter.id]>=parseInt(filter.value)) {
+                        if (row[filter.id] >= parseInt(filter.value)) {
                             return true;
                         }
                     }
@@ -81,7 +70,7 @@ const ItemList = () => {
                     filterable: true,
                     filterMethod: (filter, row) => {
                         if (filter.value === '') { return true }
-                        if (row[filter.id]<=filter.value) {
+                        if (row[filter.id] <= filter.value) {
                             return true;
                         }
                     }
@@ -94,13 +83,28 @@ const ItemList = () => {
                     filterable: true,
                     filterMethod: (filter, row) => {
                         if (filter.value === '') { return true }
-                        if (row[filter.id]>=parseInt(filter.value)) {
+                        if (row[filter.id] >= parseInt(filter.value)) {
                             return true;
                         }
                     }
                 }
                 ]
 
+                if (context.specificPage >= context.specificPages) {
+                    columns.push({
+                        Header: 'Crafter',
+                        accessor: 'Crafter',
+                        sortable: true,
+                        filterable: true,
+                        filterMethod: (filter, row) => {
+                            if (filter.value === '') { return true }
+                            else if (row[filter.id] === undefined || row[filter.id] === null) { return false }
+                            else if (row[filter.id].toUpperCase().includes(filter.value.toUpperCase())) {
+                                return true;
+                            }
+                        }
+                    })
+                }
                 return (
                     <ReactTable className="dark -striped -highlight"
                         data={context.items}
@@ -111,10 +115,5 @@ const ItemList = () => {
         </Consumer>
     );
 }
-// A function returning a boolean that specifies the filtering logic for the column
-// 'filter' == an object specifying which filter is being applied. Format: {id: [the filter column's id], 
-//value: [the value the user typed in the filter field], pivotId: [if filtering on a pivot column, 
-//the pivotId will be set to the pivot column's id and the `id` field will be set to the top level pivoting column]}
-// 'row' || 'rows' == the row (or rows, if filterAll is set to true) of data supplied to the table
-// 'column' == the column that the filter is on
+
 export default ItemList;

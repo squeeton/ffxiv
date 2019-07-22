@@ -11,11 +11,11 @@ class Marketboard extends Component {
   }
 
   componentDidMount() {
-    console.log('Marketboard props:', this.props);
   }
   render() {
 
     let page;
+    let specifics;
 
     if (this.props.loadPercent < 100) {
       page = <Loading />
@@ -27,6 +27,17 @@ class Marketboard extends Component {
     return (
       <Consumer>
         {context => {
+          if (context.specificPage < context.specificPages) {
+            specifics =
+              <div className="row">
+                <div className="col"></div>
+                <div className="col">Loading Recipes and rarity</div>
+                <div className="col">{context.specificPage} / {context.specificPages}</div>
+              </div>
+          }
+          else {
+            specifics = <div></div>
+          }
           return (
             <div className="main-content home">
               <div className="row">
@@ -48,18 +59,8 @@ class Marketboard extends Component {
                   <p><strong>Transactions Last Week</strong> search box is for transactions <strong>greater than or equal to</strong> the provided value</p>
                 </div>
               </div>
-
-
-
-
-              {/* <form onSubmit={context.actions.handleSubmit}>
-                <input type="text" placeholder="Name" ref={(input) => this.name = input} />
-                <input type="number" placeholder="Min Gil Made" ref={(input) => this.topic = input} />
-                <input type="number" placeholder="Max Units Sold" ref={(input) => this.topic = input} />
-                <input type="number" placeholder="Min Transactions" ref={(input) => this.topic = input} />
-                <button type="submit">Go!</button>
-              </form> */}
               <hr />
+              {specifics}
               {page}
             </div>
           )

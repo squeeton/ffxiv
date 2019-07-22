@@ -7,11 +7,14 @@ export class Provider extends Component {
         classJobs: [],
         data: [],
         items: [],
+        itemSpecifics: [],
         loadPercent: 0,
         loadIncrementAmount: 0,
-        pageNumber: 105,
+        pageNumber: 1,
         pageTotal: 0,
-        totalResults: 250
+        totalResults: 0,
+        specificPages: 0,
+        specificPage: 1
     }
 
 
@@ -21,6 +24,7 @@ export class Provider extends Component {
         console.log('Fetching Data');
         this.FetchClasses();
         this.FetchData(this.state.pageNumber);
+        // this.FetchItemSpecifics(105);
     }
 
     FetchClasses() {
@@ -38,10 +42,9 @@ export class Provider extends Component {
         let itemIDs;
 
         fetch(`https://xivapi.com/search?indexes=item&filters=ItemSearchCategory.ID>=9&page=${pageNum}&columns=ID`, { mode: 'cors' })
-            .then(response => response.json()
+            .then(response => { return response.json() }
             )
             .then(response => {
-                console.log(response);
                 itemIDs = response.Results.map((i) => { return (i.ID); }).toString();
                 var loadIncrementAmount = ((1 / (response.Pagination.PageTotal * 2) * 100));
 
@@ -49,9 +52,10 @@ export class Provider extends Component {
                     pageTotal: response.Pagination.PageTotal,
                     pageNumber: response.Pagination.PageNext,
                     loadIncrementAmount: loadIncrementAmount,
-                    //totalResults: response.Pagination.ResultsTotal,
+                    totalResults: response.Pagination.ResultsTotal,
                     loadPercent: prevState.loadPercent + loadIncrementAmount
                 }));
+
 
                 fetch(`https://xivapi.com/market/items?servers=Goblin&ids=${itemIDs}`, { mode: 'cors' })
                     .then(response => response.json())
@@ -90,8 +94,6 @@ export class Provider extends Component {
         let items = this.state.data;
 
 
-        console.log('items before formatting:', items);
-
         items = items.map(i => ({
             ...i.Goblin,
             MinPrice: i.Goblin.Prices.reduce((prev, current) =>
@@ -106,16 +108,104 @@ export class Provider extends Component {
         }));
 
         this.setState({
-            items: items
+            items: items,
+            data: []
         })
+        this.FetchItemSpecifics(1);
+    }
 
+    FetchItemSpecifics(pageNum) {
+
+        fetch(`https://xivapi.com/search?page=${pageNum}`, {
+            method: 'POST',
+            body: '{"indexes": "item","columns": "ID,Recipes,Rarity","body": {"query": {"bool": {"filter": [{"range": {"ItemSearchCategory.ID": {"gt": "9"}}}]}},"from": 0,"size": 100,"sort": [{"LevelItem": "desc"}]}}'
+        })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+
+                this.setState(prevState => ({
+                    specificPage: data.Pagination.Page,
+                    specificPages: data.Pagination.PageTotal,
+                    itemSpecifics: [
+                        ...prevState.itemSpecifics,
+                        ...data.Results
+                    ]
+                }));
+
+                return data.Pagination.PageNext;
+            })
+            .then(nextPage => {
+
+                if (nextPage != null) {
+                    setTimeout(this.FetchItemSpecifics(nextPage), 200);
+                }
+                else {
+                    this.MergeItemSpecifics();
+                }
+            })
+    }
+
+    MergeItemSpecifics() {
+        var index = {};
+        for (var j in this.state.itemSpecifics) {
+            var obj = this.state.itemSpecifics[j];
+            index[obj.ID] = obj;
+        }
+
+        var itemList = this.state.items;
+
+        itemList = itemList.map(i => {
+            let crafter;
+            let rarity;
+            if (index[i.Item.ID]) {
+                if (index[i.Item.ID].Recipes === null) {
+                    crafter = null;
+                }
+                else {
+                    crafter = this.GetClass(index[i.Item.ID].Recipes[0].ClassJobID);
+                }
+                rarity = this.GetRarity(index[i.Item.ID].Rarity);
+            }
+
+            return {
+                ...i,
+                Crafter: crafter,
+                Rarity: rarity
+            }
+        });
+
+        this.setState(prevState => ({
+            items: itemList.map(i => {
+                let crafter;
+                let rarity;
+                if (index[i.Item.ID]) {
+                    if (index[i.Item.ID].Recipes === null) {
+                        crafter = null;
+                    }
+                    else {
+                        crafter = this.GetClass(index[i.Item.ID].Recipes[0].ClassJobID);
+                    }
+                    rarity = this.GetRarity(index[i.Item.ID].Rarity);
+                }
+
+                return {
+                    ...i,
+                    Crafter: crafter,
+                    Rarity: rarity
+                }
+            })
+        }));
     }
 
     GetClass(id) {
+        if (id === null) {
+            return '';
+        }
         var result = this.state.classJobs.find(obj => {
-            return obj.ID === id
+            return obj.ID === id;
         })
-
         return this.toTitleCase(result.Name);
     }
 
@@ -142,7 +232,10 @@ export class Provider extends Component {
                 classJobs: this.state.classJobs,
                 data: this.state.data,
                 items: this.state.items,
+                itemSpecifics: this.state.itemSpecifics,
                 loadPercent: this.state.loadPercent,
+                specificPages: this.state.specificPages,
+                specificPage: this.state.specificPage,
                 actions: {}
             }}>
                 {this.props.children}
