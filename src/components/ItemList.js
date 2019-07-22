@@ -1,6 +1,4 @@
 import React from 'react';
-import Item from './Item';
-import NoItems from './NoItems';
 import { Consumer } from './Context';
 import ReactTable from 'react-table';
 import '../css/react-table.css';
@@ -15,16 +13,16 @@ const ItemList = () => {
                 const oneWeekAgo = new Date();
                 oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-                const customNameFilterMethod = ({ filter, row }) => {
-                    console.log('filter:', filter);
-                    console.log('row:', row[filter.id]);
+                // const customNameFilterMethod = ({ filter, row }) => {
+                //     console.log('filter:', filter);
+                //     console.log('row:', row[filter.id]);
 
 
-                    if (filter.value === '') { return true }
+                //     if (filter.value === '') { return true }
 
                     
-                    else { return false }
-                }
+                //     else { return false }
+                // }
 
                 const columns = [{
                     Header: 'Item ID',
@@ -55,6 +53,12 @@ const ItemList = () => {
                     sortable: true,
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
+                    Header: 'Lowest HQ',
+                    accessor: 'MinPrice',
+                    className: 'number-table',
+                    sortable: true,
+                    Cell: props => new Intl.NumberFormat().format(props.value)
+                },{
                     Header: 'Gil Made Last Week',
                     accessor: 'LastWeekGil',
                     className: 'number-table',

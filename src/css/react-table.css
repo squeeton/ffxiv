@@ -313,7 +313,7 @@
 }
 
 .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover{
-    background:#3b80d1;
+    background:#000;
 }
 
 .ReactTable .-pagination{

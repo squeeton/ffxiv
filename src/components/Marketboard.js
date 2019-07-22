@@ -8,8 +8,6 @@ class Marketboard extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let teacherName = this.name.value;
-    let teacherTopic = this.topic.value;
   }
 
   componentDidMount() {
