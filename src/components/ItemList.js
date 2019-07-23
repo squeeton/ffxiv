@@ -90,10 +90,10 @@ const ItemList = () => {
                 }
                 ]
 
-                if (context.specificPage >= context.specificPages) {
+                if ((context.loadPercent === 100) && (context.specificLoaded >= context.specificTotal)) {
                     columns.push({
                         Header: 'Crafter',
-                        accessor: 'Crafter',
+                        accessor: 'Crafters',
                         sortable: true,
                         filterable: true,
                         filterMethod: (filter, row) => {
@@ -103,7 +103,21 @@ const ItemList = () => {
                                 return true;
                             }
                         }
-                    })
+                    });
+                    columns.push({
+                        Header: 'Craft Lvl',
+                        accessor: 'CraftLvl',
+                        className: 'number-table',
+                        sortable: true,
+                        Cell: props => new Intl.NumberFormat().format(props.value),
+                        filterable: true,
+                        filterMethod: (filter, row) => {
+                            if (filter.value === '') { return true }
+                            if (row[filter.id] <= filter.value) {
+                                return true;
+                            }
+                        }
+                    });
                 }
                 return (
                     <ReactTable className="dark -striped -highlight"

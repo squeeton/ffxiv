@@ -27,12 +27,12 @@ class Marketboard extends Component {
     return (
       <Consumer>
         {context => {
-          if (context.specificPage < context.specificPages) {
+          if ((context.loadPercent === 100) && (context.specificLoaded < context.specificTotal)) {
             specifics =
               <div className="row">
                 <div className="col"></div>
-                <div className="col">Loading Recipes and rarity</div>
-                <div className="col">{context.specificPage} / {context.specificPages}</div>
+                <div className="col">Loading Crafters</div>
+                <div className="col">{((context.specificLoaded / context.specificTotal) * 100).toFixed(1)}%</div>
               </div>
           }
           else {
