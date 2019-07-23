@@ -24,9 +24,20 @@ const ItemList = () => {
                 }, {
                     Header: 'Item Name',
                     accessor: 'Item.Name',
-                    className: 'item-name',
+                    className:'item-name',
                     sortable: true,
                     filterable: true,
+                    cell: row => (<div
+                        style={{
+                            width: '20px',
+                            height: '100%',
+                            backgroundColor: '#fff',
+                            borderRadius: '2px'
+                        }}
+                    >
+                        <div
+                        />
+                    </div>),
                     filterMethod: (filter, row) => {
                         if (filter.value === '') { return true }
                         if (row[filter.id].toUpperCase().includes(filter.value.toUpperCase())) {
@@ -140,9 +151,12 @@ const ItemList = () => {
                         pageSizeOptions={[10, 25, 50, 100]}
                         defaultPageSize={25}
                         getTrProps={(state, rowInfo, column) => {
-                            return {
-                                className: `rarity-${rowInfo.row.Rarity}`
+                            if (rowInfo && rowInfo.row) {
+                                return {
+                                    className: `rarity-${rowInfo.row.Rarity}`
+                                }
                             }
+                            else { return {}; }
                         }}
                     />
                 );

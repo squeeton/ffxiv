@@ -20,22 +20,13 @@ export class Provider extends Component {
 
     //TODO:: add item pictures for each item
     test() {
-        fetch(`https://xivapi.com/search?page=${1}`, {
-            method: 'POST',
-            body: '{"indexes": "item","columns": "ID,Recipes","body": {"query": {"bool": {"filter": [{"range": {"ItemSearchCategory.ID": {"gte": "9"}}}]}},"from": 0,"size": 100,"sort": [{"LevelItem": "desc"}]}}'
-        })
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                // console.log('recipe response', data);
-            });
     }
 
     componentDidMount() {
         console.log('Fetching Data');
         this.FetchClasses();
         this.FetchData(this.state.pageNumber);
+        // this.test();
         // this.FetchRecipes();
 
     }
@@ -48,8 +39,6 @@ export class Provider extends Component {
                 this.setState({
                     classJobs: response.Results
                 })
-                // this.test()
-                // console.log('classes response:', response.Results);
             });
     }
 
@@ -63,7 +52,7 @@ export class Provider extends Component {
                 // console.log('itemList Initial Response', response);
                 itemIDs = response.Results.map((i) => { return (i.ID); }).toString();
                 var loadIncrementAmount = ((1 / (response.Pagination.PageTotal * 2) * 100));
-                // console.log(response);
+
                 this.setState(prevState => ({
                     pageTotal: response.Pagination.PageTotal,
                     pageNumber: response.Pagination.PageNext,
@@ -109,7 +98,6 @@ export class Provider extends Component {
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
         let items = this.state.data;
-        // console.log('items:', items);
 
         items = items.map(i => ({
             ...i.Goblin,
@@ -202,11 +190,9 @@ export class Provider extends Component {
             );
         }
 
-        console.log('post merge', merged);
-
         this.setState(prevState => ({
             items: merged,
-            recipe:[]
+            recipe: []
         }));
     }
 
