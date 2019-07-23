@@ -124,8 +124,8 @@ const ItemList = () => {
                         Cell: props => new Intl.NumberFormat().format(props.value),
                         filterable: true,
                         filterMethod: (filter, row) => {
-                            console.log('filter', filter);
-                            console.log('row[filter.id]', row[filter.id]);
+                            // console.log('filter', filter);
+                            // console.log('row[filter.id]', row[filter.id]);
                             if (filter.value === '') { return true }
                             if (row[filter.id] <= filter.value) {
                                 return true;
