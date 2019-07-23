@@ -38,24 +38,28 @@ const ItemList = () => {
                     accessor: 'MinPrice',
                     className: 'number-table',
                     sortable: true,
+                    width: 120,
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
                     Header: 'Qty',
                     accessor: 'MinPriceQuantity',
                     className: 'number-table',
                     sortable: true,
+                    width: 45,
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
                     Header: 'Lowest HQ',
                     accessor: 'MinPriceHQ',
                     className: 'number-table',
                     sortable: true,
+                    width: 120,
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
                     Header: 'Gil L/W',
                     accessor: 'LastWeekGil',
                     className: 'number-table',
                     sortable: true,
+                    width: 120,
                     Cell: props => new Intl.NumberFormat().format(props.value),
                     filterable: true,
                     filterMethod: (filter, row) => {
@@ -70,6 +74,7 @@ const ItemList = () => {
                     accessor: 'LastWeekQuantity',
                     className: 'number-table',
                     sortable: true,
+                    width: 90,
                     Cell: props => new Intl.NumberFormat().format(props.value),
                     filterable: true,
                     filterMethod: (filter, row) => {
@@ -83,6 +88,7 @@ const ItemList = () => {
                     accessor: 'LastWeekTransactions',
                     className: 'number-table',
                     sortable: true,
+                    width: 155,
                     Cell: props => new Intl.NumberFormat().format(props.value),
                     filterable: true,
                     filterMethod: (filter, row) => {
@@ -99,6 +105,7 @@ const ItemList = () => {
                         Header: 'Crafters',
                         accessor: 'Crafters',
                         sortable: true,
+                        width: 215,
                         filterable: true,
                         filterMethod: (filter, row) => {
                             if (filter.value === '') { return true }
@@ -113,9 +120,12 @@ const ItemList = () => {
                         accessor: 'CraftLvl',
                         className: 'number-table',
                         sortable: true,
+                        width: 45,
                         Cell: props => new Intl.NumberFormat().format(props.value),
                         filterable: true,
                         filterMethod: (filter, row) => {
+                            console.log('filter', filter);
+                            console.log('row[filter.id]', row[filter.id]);
                             if (filter.value === '') { return true }
                             if (row[filter.id] <= filter.value) {
                                 return true;
