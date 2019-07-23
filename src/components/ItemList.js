@@ -9,18 +9,22 @@ const ItemList = () => {
     return (
         <Consumer>
             {context => {
-
                 const oneWeekAgo = new Date();
                 oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
                 const columns = [{
                     Header: 'Item ID',
                     accessor: 'ItemID',
-                    headerClassName: 'hidden',
-                    className: 'hidden'
+                    show: false
+                }, {
+                    Header: 'Rarity',
+                    accessor: 'Rarity',
+                    className: 'rarity',
+                    show: false
                 }, {
                     Header: 'Item Name',
                     accessor: 'Item.Name',
+                    className: 'item-name',
                     sortable: true,
                     filterable: true,
                     filterMethod: (filter, row) => {
@@ -36,7 +40,7 @@ const ItemList = () => {
                     sortable: true,
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
-                    Header: 'Quantity',
+                    Header: 'Qty',
                     accessor: 'MinPriceQuantity',
                     className: 'number-table',
                     sortable: true,
@@ -48,7 +52,7 @@ const ItemList = () => {
                     sortable: true,
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
-                    Header: 'Gil Made Last Week',
+                    Header: 'Gil L/W',
                     accessor: 'LastWeekGil',
                     className: 'number-table',
                     sortable: true,
@@ -62,7 +66,7 @@ const ItemList = () => {
                         }
                     }
                 }, {
-                    Header: 'Units Sold Last Week',
+                    Header: 'Qty L/W',
                     accessor: 'LastWeekQuantity',
                     className: 'number-table',
                     sortable: true,
@@ -75,7 +79,7 @@ const ItemList = () => {
                         }
                     }
                 }, {
-                    Header: 'Transactions Last Week',
+                    Header: 'Transactions L/W',
                     accessor: 'LastWeekTransactions',
                     className: 'number-table',
                     sortable: true,
@@ -92,7 +96,7 @@ const ItemList = () => {
 
                 if ((context.loadPercent === 100) && (context.specificLoaded >= context.specificTotal)) {
                     columns.push({
-                        Header: 'Crafter',
+                        Header: 'Crafters',
                         accessor: 'Crafters',
                         sortable: true,
                         filterable: true,
@@ -105,7 +109,7 @@ const ItemList = () => {
                         }
                     });
                     columns.push({
-                        Header: 'Craft Lvl',
+                        Header: 'Lvl',
                         accessor: 'CraftLvl',
                         className: 'number-table',
                         sortable: true,
@@ -123,6 +127,13 @@ const ItemList = () => {
                     <ReactTable className="dark -striped -highlight"
                         data={context.items}
                         columns={columns}
+                        pageSizeOptions={[10, 25, 50, 100]}
+                        defaultPageSize={25}
+                        getTrProps={(state, rowInfo, column) => {
+                            return {
+                                className: `rarity-${rowInfo.row.Rarity}`
+                            }
+                        }}
                     />
                 );
             }}

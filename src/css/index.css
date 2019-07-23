@@ -326,3 +326,24 @@ header,
 .table-dark.table-striped tbody tr:nth-of-type(odd) {
   background-color:#343a40;
 }
+
+
+
+/* .rarity-Common{
+  color: #f3f3f3;
+} */
+.rarity-Common .item-name{
+  color: #f3f3f3;
+}
+.rarity-Uncommon .item-name{
+  color: #c0ffc0;
+}
+.rarity-Rare .item-name{
+  color: #5990ff;
+}
+.rarity-Relic .item-name{
+  color: #b38cff;
+}
+.rarity-Aetherial .item-name{
+  color: #d789b6;
+}
