@@ -81,15 +81,14 @@ export class Provider extends Component {
                             }
                             );
                         }
-                    })
-                return response.Pagination.PageNext;
-            })
-            .then(nextPageNum => {
-                if (nextPageNum !== null) {
-                    setTimeout(this.FetchData(this.state.pageNumber), 200);
+                    });
+
+                if (response.Pagination.PageNext !== null) {
+                    setTimeout(this.FetchData(response.Pagination.PageNext), 200);
                 }
-            }
-            );
+
+
+            });
     }
 
     FormatData() {
