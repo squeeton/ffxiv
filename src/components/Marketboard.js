@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ItemList from './ItemList';
 import Loading from './Loading';
 import { Consumer } from './Context';
+import ClassIcons from './ClassIcons'
 
 
 class Marketboard extends Component {
@@ -60,6 +61,7 @@ class Marketboard extends Component {
                 </div>
               </div>
               <hr />
+              <ClassIcons />
               {specifics}
               {page}
             </div>

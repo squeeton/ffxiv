@@ -8,9 +8,6 @@
   ELEMENT STYLES
 ====================================  */
 
-{
-  box-sizing: border-box;
-}
 body {
   color: #576366;
   background: #303030;
@@ -307,6 +304,12 @@ header,
     background-color: #b9bbbe; 
   }*/
 
+
+  .vertical-center{
+    display:flex;
+    align-items:center;
+  }
+
   .table .thead-dark th {
     color: #fff;
     background-color: #212121;
@@ -328,10 +331,6 @@ header,
 }
 
 
-
-/* .rarity-Common{
-  color: #f3f3f3;
-} */
 .rarity-Common .item-name{
   color: #f3f3f3;
 }
@@ -346,4 +345,20 @@ header,
 }
 .rarity-Aetherial .item-name{
   color: #d789b6;
+}
+
+.class-row{
+  background:#303030;
+  border-radius: 5px;
+}
+.class-icon{
+  height:50px;
+}
+
+.class-icon.active{
+  border: 3px solid transparent;
+  -moz-border-image: -moz-linear-gradient(top, #DF9F28, #FDE08D, #8f6B29 );
+  -webkit-border-image: -webkit-linear-gradient(top, #DF9F28, #FDE08D, #8f6B29 );
+  border-image: linear-gradient(to bottom, #DF9F28, #FDE08D, #8f6B29 );
+  border-image-slice: 1;
 }

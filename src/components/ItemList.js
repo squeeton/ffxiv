@@ -24,7 +24,7 @@ const ItemList = () => {
                 }, {
                     Header: 'Item Name',
                     accessor: 'Item.Name',
-                    className:'item-name',
+                    className: 'item-name',
                     sortable: true,
                     filterable: true,
                     cell: row => (<div
@@ -121,10 +121,19 @@ const ItemList = () => {
                         filterMethod: (filter, row) => {
                             if (filter.value === '') { return true }
                             else if (row[filter.id] === undefined || row[filter.id] === null) { return false }
-                            else if (row[filter.id].toUpperCase().includes(filter.value.toUpperCase())) {
-                                return true;
+                            var classes = row[filter.id].toUpperCase().split(', ');
+                            var search = filter.value.toUpperCase().split(',');
+                            search = search.filter(function (i) {
+                                return i !== ""
+                            })
+
+                            const found = classes.some(r => search.includes(r))
+                            if (found) {
+                                return found;
                             }
-                        }
+                        },
+                        Filter: ({ filter, onChange }) =>
+                            <input type="text" className="hidden"></input>
                     });
                     columns.push({
                         Header: 'Lvl',
@@ -150,6 +159,9 @@ const ItemList = () => {
                         columns={columns}
                         pageSizeOptions={[10, 25, 50, 100]}
                         defaultPageSize={25}
+                        filterable
+                        filtered={context.filtered}
+                        onFilteredChange={filtered => context.actions.filterClass({ filtered })}
                         getTrProps={(state, rowInfo, column) => {
                             if (rowInfo && rowInfo.row) {
                                 return {
