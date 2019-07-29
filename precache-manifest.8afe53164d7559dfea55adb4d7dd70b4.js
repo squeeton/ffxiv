@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "33e9e35058778a9d18dcab705ac34718",
+    "revision": "42b1ca7e43bd3e29c60fa8b28ff72f02",
     "url": "/ffxiv/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ffxiv/static/css/2.22a7d4ef.chunk.css"
   },
   {
-    "revision": "71effc4fca7c4f089ba4",
+    "revision": "e3087d12f5bd6b84db6e",
     "url": "/ffxiv/static/css/main.50298e48.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ffxiv/static/js/2.2d29963e.chunk.js"
   },
   {
-    "revision": "71effc4fca7c4f089ba4",
-    "url": "/ffxiv/static/js/main.0c9dcc94.chunk.js"
+    "revision": "e3087d12f5bd6b84db6e",
+    "url": "/ffxiv/static/js/main.daf57cd2.chunk.js"
   },
   {
     "revision": "f5298ef50d974486bc32",
