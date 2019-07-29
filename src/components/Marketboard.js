@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ItemList from './ItemList';
 import Loading from './Loading';
 import { Consumer } from './Context';
-import ClassIcons from './ClassIcons'
+import SearchForm from './SearchForm'
 
 
 class Marketboard extends Component {
@@ -40,6 +40,7 @@ class Marketboard extends Component {
             specifics = <div></div>
           }
           return (
+
             <div className="main-content home">
               <div className="row">
                 <div className="col"></div>
@@ -61,9 +62,21 @@ class Marketboard extends Component {
                 </div>
               </div>
               <hr />
-              <ClassIcons />
-              {specifics}
-              {page}
+              <div className="row">
+                <div className="col nopad"><SearchForm /></div>
+                
+              </div>
+              <div className="row">
+                <div className="col nopad">
+                  {specifics}
+                </div>
+              </div>
+              <div className="row">
+                <div className="col nopad">
+                  {page}
+                </div>
+              </div>
+
             </div>
           )
         }}

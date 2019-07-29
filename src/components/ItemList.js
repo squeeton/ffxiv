@@ -14,15 +14,18 @@ const ItemList = () => {
 
                 const columns = [{
                     Header: 'Item ID',
+                    headerClassName: 'vertical-center',
                     accessor: 'ItemID',
                     show: false
                 }, {
                     Header: 'Rarity',
+                    headerClassName: 'vertical-center',
                     accessor: 'Rarity',
                     className: 'rarity',
                     show: false
                 }, {
                     Header: 'Item Name',
+                    headerClassName: 'vertical-center',
                     accessor: 'Item.Name',
                     className: 'item-name',
                     sortable: true,
@@ -46,6 +49,7 @@ const ItemList = () => {
                     }
                 }, {
                     Header: 'Lowest Price',
+                    headerClassName: 'vertical-center',
                     accessor: 'MinPrice',
                     className: 'number-table',
                     sortable: true,
@@ -53,6 +57,7 @@ const ItemList = () => {
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
                     Header: 'Qty',
+                    headerClassName: 'vertical-center',
                     accessor: 'MinPriceQuantity',
                     className: 'number-table',
                     sortable: true,
@@ -60,6 +65,7 @@ const ItemList = () => {
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
                     Header: 'Lowest HQ',
+                    headerClassName: 'vertical-center',
                     accessor: 'MinPriceHQ',
                     className: 'number-table',
                     sortable: true,
@@ -67,6 +73,7 @@ const ItemList = () => {
                     Cell: props => new Intl.NumberFormat().format(props.value)
                 }, {
                     Header: 'Gil L/W',
+                    headerClassName: 'vertical-center',
                     accessor: 'LastWeekGil',
                     className: 'number-table',
                     sortable: true,
@@ -74,7 +81,7 @@ const ItemList = () => {
                     Cell: props => new Intl.NumberFormat().format(props.value),
                     filterable: true,
                     filterMethod: (filter, row) => {
-                        console.log(row[filter.id], '>=', parseInt(filter.value), '=', row[filter.id] >= parseInt(filter.value));
+                        // console.log(row[filter.id], '>=', parseInt(filter.value), '=', row[filter.id] >= parseInt(filter.value));
                         if (filter.value === '') { return true }
                         if (row[filter.id] >= parseInt(filter.value)) {
                             return true;
@@ -82,6 +89,7 @@ const ItemList = () => {
                     }
                 }, {
                     Header: 'Qty L/W',
+                    headerClassName: 'vertical-center',
                     accessor: 'LastWeekQuantity',
                     className: 'number-table',
                     sortable: true,
@@ -96,6 +104,7 @@ const ItemList = () => {
                     }
                 }, {
                     Header: 'Transactions L/W',
+                    headerClassName: 'vertical-center',
                     accessor: 'LastWeekTransactions',
                     className: 'number-table',
                     sortable: true,
@@ -114,6 +123,7 @@ const ItemList = () => {
                 if ((context.loadPercent === 100) && (context.specificLoaded >= context.specificTotal)) {
                     columns.push({
                         Header: 'Crafters',
+                        headerClassName: 'vertical-center',
                         accessor: 'Crafters',
                         sortable: true,
                         width: 215,
@@ -137,6 +147,7 @@ const ItemList = () => {
                     });
                     columns.push({
                         Header: 'Lvl',
+                        headerClassName: 'vertical-center',
                         accessor: 'CraftLvl',
                         className: 'number-table',
                         sortable: true,

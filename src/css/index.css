@@ -347,7 +347,7 @@ header,
   color: #d789b6;
 }
 
-.class-row{
+.search-background{
   background:#303030;
   border-radius: 5px;
 }
@@ -361,4 +361,13 @@ header,
   -webkit-border-image: -webkit-linear-gradient(top, #DF9F28, #FDE08D, #8f6B29 );
   border-image: linear-gradient(to bottom, #DF9F28, #FDE08D, #8f6B29 );
   border-image-slice: 1;
+}
+.nopad{
+  padding:0;
+}
+.search-button{
+  background: #3b80d1;
+  color: #fff;
+  border-width: 1px;
+  border-color: #3b80d1;
 }

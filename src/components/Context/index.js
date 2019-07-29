@@ -1426,7 +1426,7 @@ export class Provider extends Component {
 
     FetchData(pageNum) {
         let itemIDs;
-        console.log('Fetching page:', pageNum, 'on:', new Date());
+        // console.log('Fetching page:', pageNum, 'on:', new Date());
         fetch(`https://xivapi.com/search?indexes=item&filters=ItemSearchCategory.ID>=9&page=${pageNum}&columns=ID`, { mode: 'cors' })
             .then(response => { return response.json() }
             )
@@ -1574,7 +1574,6 @@ export class Provider extends Component {
             items: merged,
             recipe: []
         }));
-        console.log(merged);
     }
 
     GetClass(id) {
@@ -1667,10 +1666,9 @@ export class Provider extends Component {
         this.setState({
             filterClass: filterClasses
         });
-        this.getClassString(e, filterClasses);
     }
 
-    getClassString(e, filterClasses) {
+    getClassString(filterClasses) {
         var classString = '';
         if (filterClasses.alchemist) {
             classString = classString + 'alchemist,';
@@ -1709,10 +1707,38 @@ export class Provider extends Component {
             classString = '';
         }
 
-        this.setState({
-            filtered: [{ id: "Crafters", value: classString }]
-        })
+        return classString;
     }
+
+
+
+    Search = (
+        itemName,
+        lowestPrice,
+        // qty,
+        lowestHQ,
+        gilLastWeek,
+        transactions,
+        lvl
+    ) => {
+        var classString = this.getClassString(this.state.filterClass);
+
+        this.setState({
+            filtered: [
+                { id: "Crafters", value: classString },
+                { id: "Item.Name", value: itemName },
+                { id: "MinPrice", value: lowestPrice },
+                { id: "MinPriceHQ", value: lowestHQ },
+                { id: "LastWeekGil", value: gilLastWeek },
+                { id: "LastWeekTransactions", value: transactions },
+                { id: "CraftLvl", value: lvl }
+            ]
+        });
+
+    }
+
+
+
 
     toTitleCase(str) {
         return str.replace(/\w\S*/g, function (txt) {
@@ -1730,7 +1756,10 @@ export class Provider extends Component {
                 loadPercent: this.state.loadPercent,
                 specificLoaded: this.state.specificLoaded,
                 specificTotal: this.state.specificTotal,
-                actions: { filterClass: this.FilterClasses }
+                actions: {
+                    filterClass: this.FilterClasses,
+                    search: this.Search
+                }
             }}>
                 {this.props.children}
             </AppContext.Provider>

@@ -505,3 +505,6 @@
 .hidden{
     display: none;
 }
+.rt-thead.-filters{
+display: none;
+}
