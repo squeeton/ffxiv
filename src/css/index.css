@@ -352,7 +352,7 @@ header,
   border-radius: 5px;
 }
 .class-icon{
-  height:50px;
+  height:40px;
 }
 
 .class-icon.active{
@@ -370,4 +370,8 @@ header,
   color: #fff;
   border-width: 1px;
   border-color: #3b80d1;
+}
+.col{
+  padding-left: 10px;
+  padding-right: 10px;
 }

@@ -54,7 +54,13 @@ const ItemList = () => {
                     className: 'number-table',
                     sortable: true,
                     width: 120,
-                    Cell: props => new Intl.NumberFormat().format(props.value)
+                    Cell: props => new Intl.NumberFormat().format(props.value),
+                    filterMethod: (filter, row) => {
+                        if (filter.value === '') { return true }
+                        if (row[filter.id] >= parseInt(filter.value)) {
+                            return true;
+                        }
+                    }
                 }, {
                     Header: 'Qty',
                     headerClassName: 'vertical-center',
@@ -62,7 +68,14 @@ const ItemList = () => {
                     className: 'number-table',
                     sortable: true,
                     width: 45,
-                    Cell: props => new Intl.NumberFormat().format(props.value)
+                    Cell: props => new Intl.NumberFormat().format(props.value),
+                    filterMethod: (filter, row) => {
+                        // console.log(row[filter.id], '>=', parseInt(filter.value), '=', row[filter.id] >= parseInt(filter.value));
+                        if (filter.value === '') { return true }
+                        if (row[filter.id] >= parseInt(filter.value)) {
+                            return true;
+                        }
+                    }
                 }, {
                     Header: 'Lowest HQ',
                     headerClassName: 'vertical-center',
@@ -70,7 +83,14 @@ const ItemList = () => {
                     className: 'number-table',
                     sortable: true,
                     width: 120,
-                    Cell: props => new Intl.NumberFormat().format(props.value)
+                    Cell: props => new Intl.NumberFormat().format(props.value),
+                    filterMethod: (filter, row) => {
+                        // console.log(row[filter.id], '>=', parseInt(filter.value), '=', row[filter.id] >= parseInt(filter.value));
+                        if (filter.value === '') { return true }
+                        if (row[filter.id] >= parseInt(filter.value)) {
+                            return true;
+                        }
+                    }
                 }, {
                     Header: 'Gil L/W',
                     headerClassName: 'vertical-center',

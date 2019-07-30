@@ -35,10 +35,10 @@ const SearchForm = () => {
 
               <div className="row class-row">
                 <div className="col-1"></div>
-                <div className="col-3 vertical-center"><h3>Search:</h3></div>
+                <div className="col-2 vertical-center"><h3>Search:</h3></div>
                 <div className="col">
                   <div className="row">
-                    <div className="class-icon" data-tippy="Alchemist">
+                    <div className="class-icon" data-tippy="Alchemist" data-tippy-pos="top">
                       <img src={context.filterClass.alchemist ? (process.env.PUBLIC_URL + '/Icons/alchemist-a.png') : (process.env.PUBLIC_URL + '/Icons/alchemist.png')}
                         alt="Alchemist"
                         id="Alchemist"
@@ -112,29 +112,40 @@ const SearchForm = () => {
                     </div>
                   </div>
                 </div>
+                  
+                <div className="col-1">
+                  <input
+                    className="search-button"
+                    type="submit"
+                    value="Search"
+                  /></div>
               </div>
 
               <div className="row">
-                <div className="col">
-                  <input
-                    className="form-control"
-                    type="text"
-                    ref={itemName}
-                    placeholder="Item Name" />
-                </div>
-                <div className="col">
-                  <input
-                    className="form-control"
-                    type="text"
-                    ref={lowestPrice}
-                    placeholder="Lowest Price" />
-                </div>
-                <div className="col">
-                  <input
-                    className="form-control"
-                    type="text"
-                    ref={lowestHQ}
-                    placeholder="Lowest HQ Price" />
+                <div className="col-6">
+                  <div className="row">
+                    <div className="col-7">
+                      <input
+                        className="form-control"
+                        type="text"
+                        ref={itemName}
+                        placeholder="Item Name" />
+                    </div>
+                    <div className="col">
+                      <input
+                        className="form-control"
+                        type="text"
+                        ref={lowestPrice}
+                        placeholder="Lowest Price" />
+                    </div>
+                    <div className="col">
+                      <input
+                        className="form-control"
+                        type="text"
+                        ref={lowestHQ}
+                        placeholder="Lowest HQ Price" />
+                    </div>
+                  </div>
                 </div>
                 <div className="col">
                   <input
@@ -157,12 +168,6 @@ const SearchForm = () => {
                     ref={lvl}
                     placeholder="Max Lvl" />
                 </div>
-                <div className="col-1">
-                  <input
-                    className="search-button"
-                    type="submit"
-                    value="Search"
-                  /></div>
 
               </div>
 
